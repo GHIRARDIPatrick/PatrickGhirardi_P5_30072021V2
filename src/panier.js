@@ -197,6 +197,38 @@ document.getElementById("panier-adresse").addEventListener("input", function() {
 });
 document.getElementById("panier-cpostal").addEventListener("input", function() {
     controleSaisieCoordonnees("panier-cpostal");
+    code = document.getElementById("panier-cpostal").value;
+    if (code.length == 5) {
+        fetch("https://apicarto.ign.fr/api/codes-postaux/communes/" + code)
+            .then(function(res) {
+                if (res.ok) {
+                    console.log("CPOSTAL - Connexion Server GET : res.ok ");
+                    return res.json();
+                }
+            })
+            .then(function(resultat) {
+                console.log("CPOSTAL - Lecture des résultats du GET" + resultat[0].codePostal);
+                if (resultat.length == 1) {
+                    code = resultat[0].nomCommune;
+                    document.getElementById("panier-ville").value = code.toUpperCase();
+                    document.getElementById("panier-ville").style.backgroundColor = 'chartreuse';
+                    document.getElementById("panier-validation").disabled = false;
+                    contact_maj();
+                };
+            })
+            .catch(function(err) {
+                // Une erreur est survenue
+                document.getElementById("panier-cpostal").style.backgroundColor = 'salmon';
+                document.getElementById("panier-validation").disabled = true;
+                document.getElementById("panier-cpostal").value = 0;
+                document.getElementById("panier-ville").value = "";
+                contact_maj();
+                console.log("CPOSTAL - Erreur dans le GET");
+                messageErreur("Ce code postal n'existe pas. Merci de corriger SVP");
+            });
+
+    }
+
 });
 document.getElementById("panier-ville").addEventListener("input", function() {
     controleSaisieCoordonnees("panier-ville");
