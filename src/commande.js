@@ -86,7 +86,7 @@ if (contactobjet_json != null) {
 
 
     // POST COMMANDE
-    fetch("http://127.0.0.1:3000/api/teddies/order", {
+    fetch(adresseURL + "/api/teddies/order", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

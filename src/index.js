@@ -4,7 +4,7 @@ var messageErreur;
 
 console.log("JS INDEX - Ca fonctionne");
 
-fetch("http://127.0.0.1:3000/api/teddies")
+fetch(adresseURL + "/api/teddies")
     .then(function(res) {
         if (res.ok) {
             console.log("INDEX - Connexion Server GET : res.ok ");

@@ -17,7 +17,7 @@ if (indexobjet_json != null) {
 
 // PRODUIT - RECHERCHE INFORMATIONS PRODUIT
 console.log("ID Recherché : " + selectionid);
-recherche = "http://127.0.0.1:3000/api/teddies/" + selectionid;
+recherche = adresseURL + "/api/teddies/" + selectionid;
 fetch(recherche)
     .then(function(res) {
         if (res.ok) {
