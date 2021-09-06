@@ -1,0 +1,46 @@
+// LISTE DES PRODUITS //
+.liste-produit {
+    section {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        @media screen and (min-width: 992px) {
+            width: 90%;
+        }
+        h1 {
+            width: 100%;
+        }
+    }
+    article {
+        background-color: white;
+        border: $couleur-fond-de-page 2px solid;
+        border-radius: 10%;
+        width: 90%;
+        height: 300px;
+        color: $couleur-txt-nav;
+        margin: 2% 5%;
+        @media screen and (min-width: 992px) {
+            margin: auto;
+            height: 380px;
+        }
+        img {
+            border-radius: 10%;
+            padding-top: 5%;
+            padding-left: 5%;
+            width: 95%;
+            height: 200px;
+            object-fit: cover;
+            @media screen and (min-width: 992px) {
+                height: 280px;
+            }
+        }
+        h2 {
+            padding-left: 5%;
+        }
+        p {
+            padding-left: 5%;
+        }
+    }
+}
