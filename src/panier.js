@@ -158,48 +158,28 @@ if (contactobjet_json != null) {
     // CONTACT - Coloriage Erreur ou Ok
     document.getElementById("panier-validation").disabled = false;
 
-    var code = document.getElementById("panier-prenom").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-prenom").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-    } else {
-        document.getElementById("panier-prenom").style.backgroundColor = 'chartreuse';
-    }
-    var code = document.getElementById("panier-nom").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-nom").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-    } else {
-        document.getElementById("panier-nom").style.backgroundColor = 'chartreuse';
-    }
-    var code = document.getElementById("panier-adresse").value;
-    if (!code.match(/^([a-zA-Z0-9 -]+)$/)) {
-        document.getElementById("panier-adresse").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
+    controlecoordonnees("panier-prenom");
+    controlecoordonnees("panier-nom");
+    controlecoordonnees("panier-adresse");
+    controlecoordonnees("panier-cpostal");
+    controlecoordonnees("panier-ville");
+    controlecoordonnees("panier-email");
 
-    } else {
-        document.getElementById("panier-adresse").style.backgroundColor = 'chartreuse';
-    }
-    var code = document.getElementById("panier-cpostal").value;
-    if (!code.match(/^([0-9]+)$/)) {
-        document.getElementById("panier-cpostal").style.backgroundColor = 'salmon';
+}
+
+function controlecoordonnees(nomId) {
+    var code = document.getElementById(nomId).value;
+    if (nomId == "panier-prenom") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-nom") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-adresse") { coderegex = /^([a-zA-Z0-9 -]+)$/ };
+    if (nomId == "panier-cpostal") { coderegex = /^([0-9]+)$/ };
+    if (nomId == "panier-ville") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-email") { coderegex = /\S+@\S+\.\S+/ };
+    if (!code.match(coderegex)) {
+        document.getElementById(nomId).style.backgroundColor = 'salmon';
         document.getElementById("panier-validation").disabled = true;
     } else {
-        document.getElementById("panier-cpostal").style.backgroundColor = 'chartreuse';
-    }
-    var code = document.getElementById("panier-ville").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-ville").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-    } else {
-        document.getElementById("panier-ville").style.backgroundColor = 'chartreuse';
-    }
-    var code = document.getElementById("panier-email").value;
-    if (!code.length > 0) {
-        document.getElementById("panier-email").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-    } else {
-        document.getElementById("panier-email").style.backgroundColor = 'chartreuse';
+        document.getElementById(nomId).style.backgroundColor = 'chartreuse';
     }
 }
 
@@ -207,81 +187,49 @@ if (contactobjet_json != null) {
 
 // CONTACT - CONTROLE FORMULAIRE
 document.getElementById("panier-prenom").addEventListener("input", function() {
-    var code = document.getElementById("panier-prenom").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-prenom").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-        messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET");
-    } else {
-        document.getElementById("panier-prenom").style.backgroundColor = 'chartreuse';
-        document.getElementById("panier-validation").disabled = false;
-        contact_maj();
-    }
+    controleSaisieCoordonnees("panier-prenom");
 });
-
 document.getElementById("panier-nom").addEventListener("input", function() {
-    var code = document.getElementById("panier-nom").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-nom").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-        messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET");
-    } else {
-        document.getElementById("panier-nom").style.backgroundColor = 'chartreuse';
-        document.getElementById("panier-validation").disabled = false;
-        contact_maj();
-    }
+    controleSaisieCoordonnees("panier-nom");
 });
-
 document.getElementById("panier-adresse").addEventListener("input", function() {
-    var code = document.getElementById("panier-adresse").value;
-    if (!code.match(/^([a-zA-Z0-9 -]+)$/)) {
-        document.getElementById("panier-adresse").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-        messageErreur("Uniquement des chiffres et des lettres, ainsi que ESPACE et TIRET");
-    } else {
-        document.getElementById("panier-adresse").style.backgroundColor = 'chartreuse';
-        document.getElementById("panier-validation").disabled = false;
-        contact_maj();
-    }
+    controleSaisieCoordonnees("panier-adresse");
 });
-
 document.getElementById("panier-cpostal").addEventListener("input", function() {
-    var code = document.getElementById("panier-cpostal").value;
-    if (!code.match(/^([0-9]+)$/)) {
-        document.getElementById("panier-cpostal").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-        messageErreur("Uniquement des chiffres");
-    } else {
-        document.getElementById("panier-cpostal").style.backgroundColor = 'chartreuse';
-        document.getElementById("panier-validation").disabled = false;
-        contact_maj();
-    }
+    controleSaisieCoordonnees("panier-cpostal");
 });
-
 document.getElementById("panier-ville").addEventListener("input", function() {
-    var code = document.getElementById("panier-ville").value;
-    if (!code.match(/^([a-zA-Z -]+)$/)) {
-        document.getElementById("panier-ville").style.backgroundColor = 'salmon';
-        document.getElementById("panier-validation").disabled = true;
-        messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET");
-    } else {
-        document.getElementById("panier-ville").style.backgroundColor = 'chartreuse';
-        document.getElementById("panier-validation").disabled = false;
-        contact_maj();
-    }
+    controleSaisieCoordonnees("panier-ville");
+});
+document.getElementById("panier-email").addEventListener("input", function() {
+    controleSaisieCoordonnees("panier-email");
 });
 
-document.getElementById("panier-email").addEventListener("input", function() {
-    var code = document.getElementById("panier-email").value;
-    if (!code.length > 0) {
-        document.getElementById("panier-email").style.backgroundColor = 'salmon';
+function controleSaisieCoordonnees(nomId) {
+    var code = document.getElementById(nomId).value;
+    if (nomId == "panier-prenom") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-nom") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-adresse") { coderegex = /^([a-zA-Z0-9 -]+)$/ };
+    if (nomId == "panier-cpostal") { coderegex = /^([0-9]+)$/ };
+    if (nomId == "panier-ville") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-email") { coderegex = /\S+@\S+\.\S+/ };
+    if (!code.match(coderegex)) {
+        document.getElementById(nomId).style.backgroundColor = 'salmon';
         document.getElementById("panier-validation").disabled = true;
+
+        if (nomId == "panier-prenom") { messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET") };
+        if (nomId == "panier-nom") { messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET") };
+        if (nomId == "panier-adresse") { messageErreur("Uniquement des chiffres et des lettres, ainsi que ESPACE et TIRET") };
+        if (nomId == "panier-cpostal") { messageErreur("Uniquement des chiffres") };
+        if (nomId == "panier-ville") { messageErreur("Uniquement des lettres, ainsi que ESPACE et TIRET") };
+
     } else {
-        document.getElementById("panier-email").style.backgroundColor = 'chartreuse';
+        document.getElementById(nomId).style.backgroundColor = 'chartreuse';
         document.getElementById("panier-validation").disabled = false;
         contact_maj();
     }
-});
+}
+
 
 function contact_maj() {
     var contactobjet = {
