@@ -152,7 +152,7 @@ if (contactobjet_json != null) {
     document.getElementById("panier-nom").value = contact.ContactNom;
     document.getElementById("panier-adresse").value = contact.ContactAdresse;
     document.getElementById("panier-cpostal").value = contact.ContactCpostal;
-    document.getElementById("panier-ville").value = contact.ContactVille;
+    document.getElementById("panier-ville").innerHTML += '<option value="' + contact.ContactVille + '">' + contact.ContactVille + '</option>'
     document.getElementById("panier-email").value = contact.ContactEmail;
 
     // CONTACT - Coloriage Erreur ou Ok
@@ -173,7 +173,7 @@ function controlecoordonnees(nomId) {
     if (nomId == "panier-nom") { coderegex = /^([a-zA-Z -]+)$/ };
     if (nomId == "panier-adresse") { coderegex = /^([a-zA-Z0-9 -]+)$/ };
     if (nomId == "panier-cpostal") { coderegex = /^([0-9]+)$/ };
-    if (nomId == "panier-ville") { coderegex = /^([a-zA-Z -]+)$/ };
+    if (nomId == "panier-ville") { coderegex = "" };
     if (nomId == "panier-email") { coderegex = /\S+@\S+\.\S+/ };
     if (!code.match(coderegex)) {
         document.getElementById(nomId).style.backgroundColor = 'salmon';
@@ -208,13 +208,24 @@ document.getElementById("panier-cpostal").addEventListener("input", function() {
             })
             .then(function(resultat) {
                 console.log("CPOSTAL - Lecture des résultats du GET" + resultat[0].codePostal);
+                document.getElementById("panier-ville").innerHTML = "";
                 if (resultat.length == 1) {
                     code = resultat[0].nomCommune;
-                    document.getElementById("panier-ville").value = code.toUpperCase();
+                    document.getElementById("panier-ville").innerHTML += '<option value="' + code.toUpperCase() + '">' + code.toUpperCase() + '</option>'
                     document.getElementById("panier-ville").style.backgroundColor = 'chartreuse';
                     document.getElementById("panier-validation").disabled = false;
                     contact_maj();
-                };
+                } else {
+                    document.getElementById("panier-ville").innerHTML = '<option value="">--Choisissez une couleur--</option>'
+                    for (let t = 0; t < resultat.length; t++) {
+                        code = resultat[t].nomCommune;
+                        document.getElementById("panier-ville").innerHTML += '<option value="' + code.toUpperCase() + '">' + code.toUpperCase() + '</option>'
+                    }
+                }
+
+
+
+
             })
             .catch(function(err) {
                 // Une erreur est survenue
