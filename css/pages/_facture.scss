@@ -1,0 +1,21 @@
+.facture {
+    margin: 0px 10%;
+    background: none;
+    color: black;
+    .encadre {
+        margin-top: 10px;
+        border: 2px solid black;
+        &-002 {
+            height: 100px;
+        }
+        &-003 {
+            height: 50px;
+            &-001 {
+                padding-top: 12px;
+            }
+        }
+        &-004 {
+            height: 25px;
+        }
+    }
+}

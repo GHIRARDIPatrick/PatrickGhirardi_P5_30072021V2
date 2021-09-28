@@ -74,9 +74,20 @@
     </div>
 
 
-
+    <!--  CHOIX PRODUITS   -->
     <section class="container-fluid liste-produit">
-        <h1 class="text-center">Liste des produits de Nonours</h1>
+        <h1 class="text-center">Famille de produits</h1>
+        <ul class="text-center">
+            <li><a onclick="selectionFamille('ourson')" href="index.html">OURSON</a></li>
+            <li><a onclick="selectionFamille('photo')" href="index.html">APPAREIL PHOTO</a></li>
+            <li><a onclick="selectionFamille('meuble')" href="index.html">MOBILIER</a></li>
+        </ul>
+    </section>
+
+
+    <!-- AFFICHAGE PRODUITS -->
+    <section class="container-fluid liste-produit">
+        <h1 id="familleTitre" class="text-center"></h1>
 
         <!-- <a id="index-produit" href="produit.html" class="col-lg-4">
             <article>

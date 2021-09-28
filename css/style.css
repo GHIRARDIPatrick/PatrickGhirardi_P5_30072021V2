@@ -285,4 +285,26 @@ footer img {
   width: auto;
 }
 
+.facture {
+  margin: 0px 10%;
+  background: none;
+  color: black;
+}
+.facture .encadre {
+  margin-top: 10px;
+  border: 2px solid black;
+}
+.facture .encadre-002 {
+  height: 100px;
+}
+.facture .encadre-003 {
+  height: 50px;
+}
+.facture .encadre-003-001 {
+  padding-top: 12px;
+}
+.facture .encadre-004 {
+  height: 25px;
+}
+
 /*# sourceMappingURL=style.css.map */

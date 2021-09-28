@@ -216,7 +216,7 @@ document.getElementById("panier-cpostal").addEventListener("input", function() {
                     document.getElementById("panier-validation").disabled = false;
                     contact_maj();
                 } else {
-                    document.getElementById("panier-ville").innerHTML = '<option value="">--Choisissez une couleur--</option>'
+                    document.getElementById("panier-ville").innerHTML = '<option value="">--Choisissez votre ville--</option>'
                     for (let t = 0; t < resultat.length; t++) {
                         code = resultat[t].nomCommune;
                         document.getElementById("panier-ville").innerHTML += '<option value="' + code.toUpperCase() + '">' + code.toUpperCase() + '</option>'
